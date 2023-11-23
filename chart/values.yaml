@@ -1,4 +1,4 @@
 api:
   replicaCount: 1
-  image: okteto.dev/posts-ms-api:okteto
+  image: okteto.dev/messsages-ms-api:okteto
 

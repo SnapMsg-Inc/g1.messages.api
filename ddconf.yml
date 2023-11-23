@@ -1,5 +1,0 @@
-init_config:
-
-instances:
-    - host: messages-ms 
-      port: 3002

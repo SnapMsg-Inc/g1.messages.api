@@ -1,6 +1,6 @@
 FROM python:3.11.5 as base
 
-WORKDIR /usr/snapmsg-posts
+WORKDIR /usr/snapmsg-messages
 
 COPY requirements.txt requirements.txt
 
@@ -17,9 +17,9 @@ CMD pytest
 
 # production stage
 FROM base as prod
-EXPOSE 3001
-ENV DD_SERVICE=posts-ms
+EXPOSE 3002
+ENV DD_SERVICE=messages-ms
 ENV DD_LOGS_INJECTION=true
 ENV DD_ENV=prod
 
-CMD ["ddtrace-run", "uvicorn", "src.main:app" ,"--host", "0.0.0.0", "--port", "3001"] 
+CMD ["ddtrace-run", "uvicorn", "src.main:app" ,"--host", "0.0.0.0", "--port", "3002"] 
