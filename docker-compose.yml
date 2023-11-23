@@ -1,11 +1,11 @@
 version: '3.8'
 
 services: 
-  posts-ms:
-    image: posts-ms
+  messages-ms:
+    image: messages-ms
     build: .
-    container_name: posts-ms
+    container_name: messages-ms
     ports:
-      - 3001:3001
+      - 3002:3002
     restart: always
 
