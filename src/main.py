@@ -36,7 +36,7 @@ async def send_notification(notification: Notification):
 
 @app.post("/notify-follow/{follower_name}/{followed_id}")
 async def notify_follow(follower_name: str, followed_id: str):
-        await crud.notify_user_follow(follower_name, followed_id)
+        await crud.notify_follow(follower_name, followed_id)
         return {"message": "Follow Notification sent successfully"}
 
 @app.get("/get-tokens",response_model=List[TokenResponse])
