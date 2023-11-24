@@ -23,10 +23,10 @@ spec:
         image: {{ .Values.api.image }}
         env:
         - name: MONGODB_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: mongodb
-                key: mongodb-password
+          valueFrom:
+            secretKeyRef:
+              name: mongodb
+              key: mongodb-password
         - name: MONGODB_USERNAME
           value: "snapmsg"
         - name: MONGODB_DATABASE
