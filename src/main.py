@@ -5,12 +5,6 @@ from . import crud
 from .models import *
 from typing import List
 
-import firebase_admin
-from firebase_admin import credentials
-
-cred = credentials.Certificate("../snap-msg-firebase-adminsdk-k7p33-b70464c53b.json")
-firebase_admin.initialize_app(cred)
-
 app = FastAPI()
 
 config = {
