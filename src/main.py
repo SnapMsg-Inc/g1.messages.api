@@ -8,7 +8,7 @@ app = FastAPI()
 
 config = {
     "db" : "messagesdb",
-    "host" : "posts-db-mongodb",
+    "host" : "messages-db-mongodb",
     "port" : 27017,
     "username" : "root",
     "password" : "snapmsg",
@@ -16,13 +16,12 @@ config = {
     "connectTimeoutMS" : 2000,
     "serverSelectionTimeoutMS" : 2000
 }
-url = "mongodb://snapmsg:snapmsg@posts-db-mongodb:27017/messagesdb"
+url = "mongodb://snapmsg:snapmsg@messages-db-mongodb:27017/messagesdb"
 mongoengine.connect(**config)
-
 
 @app.get("/")
 async def root():
-    return {"message": "posts microsevice"}
+    return {"message": "messages microsevice"}
 
 @app.post("/register-token")
 async def register_token(token_data: TokenData):

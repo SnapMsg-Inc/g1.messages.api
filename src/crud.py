@@ -6,7 +6,6 @@ from google.auth.transport.requests import Request
 from .models import UserToken
 import requests
 
-
 def get_access_token():
     SERVICE_ACCOUNT_FILE = '../snap-msg-firebase-adminsdk-k7p33-b70464c53b.json'
     SCOPES = ['https://www.googleapis.com/auth/firebase.messaging']
@@ -52,7 +51,7 @@ async def notify_follow(follower_name: str, followed_id: str):
     try:
         followed_user_token = UserToken.objects(user_id=followed_id).first()
         if followed_user_token:
-            status_code, response_text = send_push_notification(
+            status_code, response_text = await send_push_notification(
                 followed_user_token.token,
                 "New Follow",
                 f"{follower_name} started following you."
