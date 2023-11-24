@@ -63,7 +63,7 @@ async def notify_follow(follower_name: str, followed_id: str):
         return {"error": str(e)}
     
 async def get_tokens():
-    return UserToken.objects.all()
+    return UserToken.objects().all()
 
 async def get_token(user_id: str):
     return UserToken.objects(user_id=user_id).first()

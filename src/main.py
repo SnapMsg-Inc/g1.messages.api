@@ -3,6 +3,7 @@ from fastapi import FastAPI
 import mongoengine
 from . import crud
 from .models import *
+from typing import List
 
 app = FastAPI()
 
@@ -38,10 +39,10 @@ async def notify_follow(follower_name: str, followed_id: str):
         await crud.notify_user_follow(follower_name, followed_id)
         return {"message": "Follow Notification sent successfully"}
 
-@app.get("/get-tokens")
+@app.get("/get-tokens",response_model=List[TokenResponse])
 async def get_tokens():
     return await crud.get_tokens()
 
-@app.get("/get-user-tokens/{user_id}")
+@app.get("/get-user-tokens/{user_id}",response_model=TokenResponse)
 async def get_user_tokens(user_id: str):
     return await crud.get_user_tokens(user_id)

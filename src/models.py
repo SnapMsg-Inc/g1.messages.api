@@ -14,3 +14,8 @@ class Notification(BaseModel):
     title: str
     body: str
 
+class TokenResponse(BaseModel):
+    user_id: str
+    token: str
+
+
