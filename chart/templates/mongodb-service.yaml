@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: messagesdb 
   labels:
-    {{- include "movies.labels" . | nindent 4 }}
+    {{- include "messages.labels" . | nindent 4 }}
     app.kubernetes.io/component: messagesdb 
 spec:
   type: ClusterIP
