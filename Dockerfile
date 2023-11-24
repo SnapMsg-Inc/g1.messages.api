@@ -21,5 +21,7 @@ EXPOSE 3002
 ENV DD_SERVICE=messages-ms
 ENV DD_LOGS_INJECTION=true
 ENV DD_ENV=prod
+ENV FIREBASE_SERVER_KEY=
+
 
 CMD ["ddtrace-run", "uvicorn", "src.main:app" ,"--host", "0.0.0.0", "--port", "3002"] 
