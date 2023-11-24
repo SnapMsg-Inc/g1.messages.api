@@ -1,14 +1,10 @@
 from fastapi import FastAPI
-import firebase_admin
-from firebase_admin import credentials
+
 import mongoengine
 from . import crud
 from .models import *
 
 app = FastAPI()
-
-cred = credentials.Certificate('../serviceAccountKey.json')
-firebase_admin.initialize_app(cred)
 
 config = {
     "db" : "messagesdb",
