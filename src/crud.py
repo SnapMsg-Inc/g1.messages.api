@@ -42,12 +42,13 @@ async def send_push_notification(token: str, title: str, body: str):
             }
         }
     }
-
     response = requests.post(url, headers=headers, json=message)
+    print(response.status_code, response.text)
     return response.status_code, response.text
 
 
 async def notify_follow(follower_name: str, followed_id: str):
+    print(f"follower_name: {follower_name}, followed_id: {followed_id}")
     try:
         followed_user_token = UserToken.objects(user_id=followed_id).first()
         if followed_user_token:
@@ -62,9 +63,10 @@ async def notify_follow(follower_name: str, followed_id: str):
     except Exception as e:
         return {"error": str(e)}
     
+    
 async def get_tokens():
     return UserToken.objects().all()
 
-async def get_token(user_id: str):
+async def get_user_token(user_id: str):
     return UserToken.objects(user_id=user_id).first()
     
