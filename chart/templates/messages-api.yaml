@@ -25,7 +25,7 @@ spec:
         - name: MONGODB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: mongodb
+              name: messagesdb 
               key: mongodb-password
         - name: MONGODB_USERNAME
           value: "snapmsg"

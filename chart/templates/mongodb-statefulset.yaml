@@ -31,12 +31,12 @@ spec:
         - name: MONGODB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: mongodb
+              name: messagesdb 
               key: mongodb-password
         - name: MONGODB_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: mongodb
+              name: messagesdb
               key: mongodb-root-password
         - name: MONGODB_USERNAME
           value: "snapmsg"
@@ -45,7 +45,7 @@ spec:
         - name: MONGODB_DISABLE_SYSTEM_LOG
           value: "no"
         - name: MONGODB_DATABASE
-          value: "okteto"
+          value: "messagesdb"
         - name: MONGODB_ENABLE_IPV6
           value: "no"
         - name: MONGODB_ENABLE_DIRECTORY_PER_DB
