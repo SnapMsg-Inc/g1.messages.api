@@ -28,14 +28,14 @@ spec:
                 name: mongodb
                 key: mongodb-password
         - name: MONGODB_USERNAME
-            value: snapmsg 
+          value: "snapmsg"
         - name: MONGODB_DATABASE
-            value: messagesdb 
+          value: "messagesdb"
         - name: MONGODB_HOST
-            value: messagesdb 
+          value: "messagesdb"
         ports:
         - name: http
-          containerPort: 3001
+          containerPort: 3002
           protocol: TCP
 		
 ---
