@@ -1,7 +1,7 @@
-name: g1.posts.api
+name: g1.messages.api
 
 build:
-  posts-api:
+  messages-api:
     context: .
 
 deploy:
@@ -9,7 +9,7 @@ deploy:
      --set api.image=${OKTETO_BUILD_MESSAGES_API_IMAGE}
 
 dev:
-  posts-api:
+  messages-api:
     command: ddtrace-run uvicorn src.main:app --host 0.0.0.0 --port 3002 --reload
     forward:
       - 3000:3000
