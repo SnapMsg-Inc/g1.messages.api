@@ -10,10 +10,11 @@ deploy:
 
 dev:
   messages-api:
-    command: ddtrace-run uvicorn src.main:app --host 0.0.0.0 --port 3002 --reload
+    command: ddtrace-run uvicorn src.main:app --host 0.0.0.0 --port 3001 --reload
     forward:
-      - 3000:3000
+      - 3001:3001
       - 27017:messages-db:27017
       - 8126:datadog-agent:8126
+      - 8125:datadog-agent:8125
     sync:
       - .:/usr/snapmsg-messages
