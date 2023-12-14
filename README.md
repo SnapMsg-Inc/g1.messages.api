@@ -1,5 +1,6 @@
 Messages-microservice
 
+
 A microservice component for the SnapMsg API.
 
 Getting Started
@@ -16,3 +17,19 @@ Pytest: 7.2.1
 HTTPX: 0.23.3
 Docker: 1.0
 Executing program
+To run the program, execute the following command:
+
+Make run-local```
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE.md file for details.
+
+## Acknowledgments
+
+Inspiration, code snippets, etc.:
+
+- [FastAPI Documentation](https://fastapi.tiangolo.com/)
+- [Gin Tonic](https://www.gintonic.app/)
+- [Taller de Programación 2](https://taller-de-programacion-2.github.io/)
+- [Okteto](https://okteto.com/docs/)
