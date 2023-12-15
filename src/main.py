@@ -16,6 +16,7 @@ config = {
     "authentication_source" : "admin",
     "connectTimeoutMS" : 2000,
     "serverSelectionTimeoutMS" : 2000
+
 }
 url = "mongodb://snapmsg:snapmsg@messages-db-mongodb:27017/messagesdb"
 mongoengine.connect(**config)
@@ -36,7 +37,7 @@ async def send_notification(notification: Notification):
 
 @app.get("/get-user-tokens/{user_id}",response_model=TokenResponse)
 async def get_user_tokens(user_id: str):
-    return await crud.get_user_tokens(user_id)
+    return await crud.get_user_token(user_id)
 
 @app.get("/get-users", response_model=List[TokenResponse])
 async def get_users_endpoint():

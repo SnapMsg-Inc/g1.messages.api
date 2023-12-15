@@ -21,11 +21,6 @@ class TokenResponse(BaseModel):
     token: str
 
 class MessageNotification(BaseModel):
-    receiver_id: str
-    title: str 
-    message_content: str 
-
-class MessageNotification(BaseModel):
     sender_alias: str  # Alias del usuario que envía el mensaje
     receiver_id: str   # ID del usuario que recibe el mensaje
     message_content: str  # Contenido del mensaje

@@ -7,6 +7,21 @@ from firebase_admin import messaging
 import mongoengine
 from .models import TokenResponse
 from typing import List, Optional
+from mongoengine import DoesNotExist
+from .models import UserToken
+
+
+class CRUDException(Exception):
+    message: str = "API Error: "
+    code: int
+
+    def __init__(self, message, code=400):
+        self.message += message
+        self.code = code
+
+    def __str__(self):
+        return self.message
+
 
 
 cred = credentials.Certificate("snap-msg-firebase-adminsdk-k7p33-b70464c53b.json")
@@ -45,17 +60,23 @@ async def get_tokens():
     return UserToken.objects().all()
 
 async def get_user_token(user_id: str):
-    return UserToken.objects(user_id=user_id).first()
+    try:
+        UserToken  = UserToken.objects(user_id=user_id).first()
+    except DoesNotExist:
+        raise CRUDException("token does not exist")
+    
+    return UserToken
 
 async def get_users():
+    
     users = UserToken.objects().distinct('user_id')
+    if not users:
+        return 
     response = []
 
     for user_id in users:
-        # Suponiendo que quieres el último token para cada usuario
         token_data = UserToken.objects(user_id=user_id).order_by('-id').first()
         if token_data:
-            # Convierte directamente a un diccionario y luego a TokenResponse
             response.append(TokenResponse(**token_data.to_mongo().to_dict()))
 
     return response
@@ -78,46 +99,38 @@ async def notify_follow(follower_name: str, followed_id: str):
 
 async def notify_message(receiver_id: str, title: str, message_content: str, sender_alias: str):
     try:
-        # Obtener el token del dispositivo del usuario receptor
         user_token = UserToken.objects(user_id=receiver_id).first()
         if not user_token:
             raise Exception(f"No token found for user {receiver_id}")
 
-        # Preparar el contenido de la notificación
         body = f"{sender_alias}: {message_content}"
 
-        # Crear el mensaje de la notificación
         message = messaging.Message(
             notification=messaging.Notification(title=title, body=body),
             token=user_token.token,
         )
 
-        # Enviar la notificación
         response = messaging.send(message)
         return response
     except Exception as e:
-        # Manejo de errores
         raise e
 
 async def notify_mention(mentioned_user_ids: List[str], mentioning_user_id: Optional[str], message_content: str):
     try:
-        # Obtener los tokens de los dispositivos de los usuarios mencionados
         user_tokens = [user_token.token for user_token in UserToken.objects(user_id__in=mentioned_user_ids)]
+        
+        print(f"Tokens: {user_tokens}")
 
-        # Preparar el contenido de la notificación
-        title = "Has sido mencionado!"
-        body = f"{mentioning_user_id if mentioning_user_id else 'Alguien'} te mencionó: {message_content}"
+        title = "New Mention"
+        body = f"{mentioning_user_id if mentioning_user_id else 'Alguien'} mentioned you:  {message_content}"
         
         
-        # Crear un mensaje multicast
         message = messaging.MulticastMessage(
             notification=messaging.Notification(title=title, body=body),
             tokens=user_tokens,
         )
 
-        # Enviar el mensaje multicast
         response = messaging.send_multicast(message)
-        return response.success_count  # Retorna la cantidad de mensajes enviados exitosamente
+        return response.success_count  
     except Exception as e:
-        # Manejo de errores
         raise e
