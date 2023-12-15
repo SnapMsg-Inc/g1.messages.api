@@ -122,7 +122,7 @@ async def notify_mention(mentioned_user_ids: List[str], mentioning_user_id: Opti
         print(f"Tokens: {user_tokens}")
 
         title = "New Mention"
-        body = f"{mentioning_user_id if mentioning_user_id else 'Alguien'} mentioned you:  {message_content}"
+        body = f"{mentioning_user_id if mentioning_user_id else 'someone'} mentioned you:  {message_content}"
         
         
         message = messaging.MulticastMessage(
