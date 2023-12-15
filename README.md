@@ -1,3 +1,2 @@
-**
-Microservicio destinado  a realizar las notificaciones y menciones principalmente.
-**
+Microservicio destinado  a realizar las notificaciones y menciones principalmente
+
