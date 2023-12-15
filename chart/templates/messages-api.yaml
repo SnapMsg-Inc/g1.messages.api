@@ -30,9 +30,9 @@ spec:
           value: "datadog-agent"
         ports:
         - name: http
-          containerPort: 3002
+          containerPort: 3001
           protocol: TCP
-		
+
 ---
 
 apiVersion: v1
@@ -45,8 +45,8 @@ spec:
   type: ClusterIP
   ports:
   - protocol: TCP
-    port: 8080
-    targetPort: 3002
+    port: 3001 
+    targetPort: 3001
     name: http
   selector: # labels to match pods
     app.kubernetes.io/name: messages-api
