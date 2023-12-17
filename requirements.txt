@@ -4,4 +4,7 @@ uvicorn==0.23.2
 datadog==0.47.0
 ddtrace==1.19.0
 mongoengine==0.24.2
+firebase-admin==4.5.2
+requests==2.25.1
+google-auth==1.30.0
 
