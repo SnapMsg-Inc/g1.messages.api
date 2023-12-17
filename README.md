@@ -1,2 +1,2 @@
-# g1.messages.api
-Microservicio de mensajes y notificaciones 
+Microservicio destinado  a realizar las notificaciones y menciones principalmente
+
